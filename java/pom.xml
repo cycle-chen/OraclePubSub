@@ -30,14 +30,14 @@
   <dependencies>
 <dependency>
   <groupId>com.oracle</groupId>
-  <artifactId>ojdbc5</artifactId>
-  <version>11.1.0.7.0</version>
+  <artifactId>ojdbc7</artifactId>
+  <version>12.1.0.2</version>
 </dependency>
 
    <dependency>
      <groupId>org.jboss.netty</groupId>
      <artifactId>netty</artifactId>
-     <version>3.2.7.Final</version>
+     <version>3.2.10.Final</version>
    </dependency>
 
    <dependency>
@@ -87,7 +87,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.7</version>
+        <version>3.1</version>
         <configuration>
           <level>public</level>
           <links>
@@ -95,11 +95,11 @@
           </links>
         </configuration>
       </plugin>
-      <plugin>
+<!--       <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-resources-plugin</artifactId>
             <version>2.3</version>
-        </plugin>
+        </plugin> -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>

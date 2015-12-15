@@ -11,7 +11,7 @@ import com.lambdaworks.redis.pubsub.RedisPubSubConnection;
 import com.lambdaworks.redis.pubsub.RedisPubSubListener;
 
 
-public class PubSub implements RedisPubSubListener <String, String> {
+public class PubSub implements RedisPubSubListener <String> {
 	public static final String host = "localhost";
 	public static final int port = 6379;
 	private final RedisClient client = new RedisClient(host, port);

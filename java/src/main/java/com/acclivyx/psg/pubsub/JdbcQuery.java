@@ -3,20 +3,12 @@ package com.acclivyx.psg.pubsub;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
-
-import oracle.jdbc.OracleCallableStatement;
-import oracle.jdbc.OracleTypes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,64 +82,6 @@ public class JdbcQuery {
 		}
 
 	}
-
-	public JSONArray performRefCursor(String storedProc) throws Exception {
-		JSONObject json = new JSONObject(storedProc);
-		JSONArray args = json.getJSONArray("args");
-		JSONArray arg_types = json.getJSONArray("arg_types");
-
-		CallableStatement stmt = null;
-		ResultSet rs = null;
-		try {
-			stmt = connection.prepareCall(json.getString("sp"));
-			for (int i = 0; i < arg_types.length(); i++) {
-				int arg_type = arg_types.getInt(i);
-				if (arg_type == java.sql.Types.BIGINT) {
-					stmt.setInt(i + 1, args.getInt(i));
-				} else if (arg_type == java.sql.Types.BOOLEAN) {
-					stmt.setBoolean(i + 1, args.getBoolean(i));
-				} else if (arg_type == java.sql.Types.BLOB) {
-					Blob blob = connection.createBlob();
-					blob.setBytes(1, args.getString(i).getBytes());
-					stmt.setBlob(i + 1, blob);
-				} else if (arg_type == java.sql.Types.DOUBLE) {
-					stmt.setDouble(i + 1, args.getDouble(i));
-				} else if (arg_type == java.sql.Types.INTEGER) {
-					stmt.setInt(i + 1, args.getInt(i));
-				} else if (arg_type == java.sql.Types.NVARCHAR) {
-					stmt.setNString(i + 1, args.getString(i));
-				} else if (arg_type == java.sql.Types.VARCHAR) {
-					stmt.setString(i + 1, args.getString(i));
-				} else if (arg_type == java.sql.Types.TINYINT) {
-					stmt.setInt(i + 1, args.getInt(i));
-				} else if (arg_type == java.sql.Types.SMALLINT) {
-					stmt.setShort(i + 1, (short) args.getInt(i));
-				} else if (arg_type == java.sql.Types.DATE) {
-					DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-					stmt.setDate(i + 1, new Date(df.parse(args.getString(i))
-							.getTime()));
-				} else {
-					throw new Exception("invalid arg type: " + arg_type);
-				}
-			}
-
-			stmt.registerOutParameter(json.getInt("rs"), OracleTypes.CURSOR); // REF
-																				// CURSOR
-			stmt.execute();
-			rs = ((OracleCallableStatement) stmt).getCursor(2);
-			return convertResultSetToJSON(rs);
-		} finally {
-			if (rs != null) {
-				rs.close();
-				rs = null;
-			}
-			if (stmt != null) {
-				stmt.close();
-				stmt = null;
-			}
-		}
-	}
-
 	public JSONArray convertResultSetToJSON(java.sql.ResultSet rs)
 			throws SQLException, JSONException {
 

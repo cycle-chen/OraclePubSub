@@ -30,7 +30,6 @@ public class PubSub implements RedisPubSubListener <String> {
 		pubsub = client.connectPubSub();
 		pubsub.addListener(this);
 		pubsub.subscribe("query");
-		pubsub.subscribe("storedProc");
 	
 	}
 
@@ -42,10 +41,7 @@ public class PubSub implements RedisPubSubListener <String> {
 				JSONArray json = jdbcQuery.performQuery(cm.message);
 				redis.publish("query-output", json.toString());
 				
-			} else if (cm.channel.equals("storedProc")) {
-				JSONArray json = jdbcQuery.performRefCursor(cm.message);
-				redis.publish("storedProc-output", json.toString());
-			}
+			} 
 		}
 	}
 	public void openConnection() throws Exception {

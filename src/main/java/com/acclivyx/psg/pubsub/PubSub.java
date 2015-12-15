@@ -2,7 +2,6 @@ package com.acclivyx.psg.pubsub;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
 import org.json.JSONArray;
 
 import com.lambdaworks.redis.RedisClient;

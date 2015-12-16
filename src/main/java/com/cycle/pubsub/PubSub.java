@@ -1,4 +1,4 @@
-package com.acclivyx.psg.pubsub;
+package com.cycle.pubsub;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

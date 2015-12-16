@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.acclivyx</groupId>
-  <artifactId>oraclepubsub</artifactId>
+  <groupId>com.cycle</groupId>
+  <artifactId>redis-subscribe</artifactId>
   <version>0.0.1</version>
 
   <packaging>jar</packaging>
 
-  <name>oraclePubSub</name>
+  <name>redis-subscribe</name>
   <description>java pub sub with Redis</description>
   <licenses>
     <license>

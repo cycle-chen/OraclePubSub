@@ -1,4 +1,4 @@
-package com.acclivyx.psg.pubsub;
+package com.cycle.pubsub;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

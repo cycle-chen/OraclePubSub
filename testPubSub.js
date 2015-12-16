@@ -16,13 +16,13 @@ async.parallel({
         });
     }
 },
-               /**
-                  * Results contains array 
-                  */
-               function(err,results) {
-                   processQueryResults(results.query);
-                   oraclePubSub.end();
-               });
+/**
+* Results contains array 
+*/
+function(err,results) {
+    processQueryResults(results.query);
+    oraclePubSub.end();
+});
 
 
 function processQueryResults(queryResults){
